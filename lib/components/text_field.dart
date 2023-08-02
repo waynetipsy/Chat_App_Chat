@@ -17,16 +17,20 @@ class MyTextField extends StatelessWidget {
     return TextField(
      controller: controller,
      obscureText: obscureText,
-     decoration: const InputDecoration(
-      enabledBorder: OutlineInputBorder(
+     decoration: InputDecoration(
+      enabledBorder: const OutlineInputBorder(
         borderSide: BorderSide(
           color: Colors.white,
           ),
        
       ),
-      focusedBorder: OutlineInputBorder(
+      focusedBorder: const OutlineInputBorder(
         borderSide: BorderSide(color: Colors.white)
-      )
+      ),
+      fillColor: Colors.grey.shade200,
+      filled: true,
+      hintText: hintText,
+      hintStyle: TextStyle(color: Colors.grey[500])
      ),
     );
   }
