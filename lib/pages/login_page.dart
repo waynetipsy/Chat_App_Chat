@@ -1,9 +1,11 @@
 import 'package:chat_app_cool/components/text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../components/button.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  final Function()? onTap;
+  const LoginPage({super.key, this.onTap});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -13,6 +15,12 @@ class _LoginPageState extends State<LoginPage> {
   // text editing controllers
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
+
+  // sign user in
+
+  void signIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(email: , password: password);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-            //const SizedBox(height: 50),
+             // const SizedBox(height: 50),
               // Logo
               const  Icon(
                   Icons.lock,
@@ -44,11 +52,11 @@ class _LoginPageState extends State<LoginPage> {
                 // email textfield
                 MyTextField(
                   controller: emailTextController,
-                  hintText: 'email',
+                  hintText: 'Email',
                   obscureText: false
                   ),
 
-                  SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 
                 // password textfield
 
@@ -58,17 +66,18 @@ class _LoginPageState extends State<LoginPage> {
                   obscureText: true
                   ),
 
-                  SizedBox(height: 20,),
+               const SizedBox(height: 20,),
           
                 // sign in button
 
                 MyButton(
-                  onTap: () {},
+                  onTap: signIn,
                   text: 'Sign In'
                   ),
-               SizedBox(height: 10,),
+             const SizedBox(height: 10,),
                 // go to register page
-                Row(
+
+                  Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Not a member?",
@@ -76,21 +85,18 @@ class _LoginPageState extends State<LoginPage> {
                       color: Colors.grey[700]
                     ),
                     ),
+                   const SizedBox(width: 5,),
                    GestureDetector(
-                    onTap: () {
-                      
-                    },
+                    onTap: widget.onTap,
                      child: const Text("Register now",
                       style: TextStyle(
-                                     fontWeight: FontWeight.bold,
-                                     color: Colors.blue
+                         fontWeight: FontWeight.bold,
+                         color: Colors.blue
                        ),
                       ),
-                   ),
-                  
+                    ),
                   ],
                 ),
-
               ],
             ),
           ),

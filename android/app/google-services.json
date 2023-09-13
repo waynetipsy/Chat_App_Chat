@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "29297378484",
+    "project_id": "chatapp-c79c8",
+    "storage_bucket": "chatapp-c79c8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29297378484:android:ae2fd922b7ef693be8c3e1",
+        "android_client_info": {
+          "package_name": "com.waynetipsy.chat_app_cool"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB43M5Nc0ps33CuErQXiB_ZpmhIgnH5z-E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
