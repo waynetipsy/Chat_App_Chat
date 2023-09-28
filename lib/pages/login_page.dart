@@ -13,13 +13,17 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   // text editing controllers
+
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
 
   // sign user in
 
   void signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(email: , password: password);
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email:emailTextController.text,  
+      password: passwordTextController.text
+       );
   }
 
   @override
@@ -69,8 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                const SizedBox(height: 20,),
           
                 // sign in button
-
-                MyButton(
+                  MyButton(
                   onTap: signIn,
                   text: 'Sign In'
                   ),
