@@ -1,9 +1,12 @@
 import 'package:chat_app_cool/components/text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import '../components/drawer.dart';
+import '../pages/profile_page.dart';
 import '../components/wall_post.dart';
+
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -35,9 +38,29 @@ class _HomePageState extends State<HomePage> {
           'UserEmail' : currentUser.email,
           'Message' : textController.text,
           'TimeStamp' : Timestamp.now(),
-      });
-      }
+          'Likes': [],
+         });
+        }
+
+      // clear the textfield
+         setState(() {
+       textController.clear();
+         });
     }
+
+    // navigate to profile page
+    void goToProfilePage() {
+      // pop menu drawer
+      Navigator.pop(context);
+
+      //go to profile page
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) => const ProfilePage(),
+          )
+        );
+    }
+
+   
 
   @override
   Widget build(BuildContext context) {
@@ -46,12 +69,16 @@ class _HomePageState extends State<HomePage> {
       appBar: 
       AppBar(title: const Text('The Wall'),
      backgroundColor: Colors.grey[900],
-      actions: [
-        // sign out button
-        IconButton(onPressed: signOut, 
+    /* actions: [
+         //sign out button
+       IconButton(onPressed: signOut, 
         icon: const Icon(Icons.logout)
-        )
-      ],
+        ),
+     ], */
+    ),
+      drawer:  MyDrawer(
+       onProfileTap: goToProfilePage,
+         onSignOut: signOut,
       ),
       body:  Center(
         child: Column(
@@ -73,6 +100,8 @@ class _HomePageState extends State<HomePage> {
                   WallPost(
                     message: post['Message'],
                     user: post['UserEmail'], 
+                    postId: post.id,
+                    likes: List<String>.from(post['Likes'] ?? []),
                     //time: time
                     );
                   }
